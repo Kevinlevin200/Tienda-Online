@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalFinal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         
         // Muestra un mensaje de confirmación simulado
-        alert(`¡Gracias por tu compra!\n\nTotal pagado: $${totalFinal.toFixed(2)}\n\nTu pedido ha sido procesado. (Esto es una simulación).`);
+        alert(`¡Gracias por tu compra!\n\nTotal pagado: $${totalFinal.toFixed(2)}\n\nTu pedido ha sido procesado.`);
         
         // Limpia el carrito después de la "compra"
         cart = [];
