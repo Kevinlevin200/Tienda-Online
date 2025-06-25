@@ -174,6 +174,6 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para má
 
 Para preguntas o sugerencias, no dudes en abrir un issue o contactar al equipo de desarrollo.
 
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
+![image-3](https://github.com/user-attachments/assets/26738ac1-133f-4ed9-9559-299a1be1bfa1)
+![image-4](https://github.com/user-attachments/assets/1bc27a70-09de-4bff-b275-526eac17e004)
+![image-5](https://github.com/user-attachments/assets/8d2ddbf9-8bd7-4177-a32d-1259fbf06926)
