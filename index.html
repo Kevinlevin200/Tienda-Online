@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo"><h1><a href="/">Tienda Online</a></h1></div>
+        <div class="search-container">
+            <input type="search" id="search-input" placeholder="Buscar por nombre o descripción...">
+        </div>
+        <div class="cart-icon-container">
+            <button id="cart-toggle-btn">
+                🛒
+                <span id="cart-counter" class="cart-counter">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="controls-container">
+            <div class="filter-group">
+                <label for="category-filter">Categoría:</label>
+                <select id="category-filter">
+                    <option value="all">Todas</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort-filter">Ordenar por:</label>
+                <select id="sort-filter">
+                    <option value="default">Por defecto</option>
+                    <option value="price-asc">Precio: más bajo a más alto</option>
+                    <option value="price-desc">Precio: más alto a más bajo</option>
+                    <option value="name-asc">Nombre: A-Z</option>
+                    <option value="name-desc">Nombre: Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <section id="product-grid" class="product-grid">
+            <!-- Los productos se renderizarán aquí -->
+            <div class="loader" id="loader">Cargando productos...</div>
+        </section>
+    </main>
+
+    <aside id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <button id="cart-close-btn" class="close-btn">×</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Los items del carrito se renderizarán aquí -->
+        </div>
+        <div class="cart-footer">
+            <p class="cart-total">Total: <span id="cart-total-price">$0.00</span></p>
+            <button id="checkout-btn" class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </aside>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+</body>
+</html>
