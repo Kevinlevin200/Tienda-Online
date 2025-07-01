@@ -218,6 +218,23 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart(); // Guarda los cambios
         updateCartUI(); // Actualiza la interfaz
     }
+
+    /**
+     * Actualiza la cantidad de un producto en el carrito.
+     * @param {number} productId - El ID del producto a actualizar.
+     * @param {number} quantity - La nueva cantidad deseada.
+     * Asegura que la cantidad no sea menor a 1.
+     */
+    function updateQuantity(productId, quantity) {
+        const cartItem = cart.find(item => item.id === productId);
+        if (cartItem) {
+            quantity = parseInt(quantity);
+            if (quantity < 1) quantity = 1; // Prevent quantities less than 1
+            cartItem.quantity = quantity;
+            saveCart(); // Guarda los cambios en localStorage
+            updateCartUI(); // Actualiza la interfaz
+        }
+    }
   
     /**
      * Actualiza toda la interfaz de usuario del carrito (sidebar, total, contador).
@@ -238,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${item.image}" alt="${item.title}" class="cart-item-img">
                     <div class="cart-item-info">
                         <p class="cart-item-title">${item.title}</p>
+                        <input type="number" value="${item.quantity}" min="1" class="w-16 p-1 border rounded cart-item-quantity" data-id="${item.id}">
                         <p class="cart-item-price">${item.quantity} x $${item.price.toFixed(2)}</p>
                     </div>
                     <button class="remove-from-cart-btn" data-id="${item.id}">×</button>
@@ -369,11 +387,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
   
-    // Eliminar del carrito - también usa delegación de eventos
+    // Eliminar del carrito y actualizar cantidades - también usa delegación de eventos
     cartItemsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-from-cart-btn')) {
             const productId = parseInt(e.target.dataset.id, 10);
             removeFromCart(productId);
+        }
+    });
+
+    // Actualizar cantidad del carrito
+    cartItemsContainer.addEventListener('change', (e) => {
+        if (e.target.classList.contains('cart-item-quantity')) {
+            const productId = parseInt(e.target.dataset.id, 10);
+            const quantity = e.target.value;
+            updateQuantity(productId, quantity);
         }
     });
     
@@ -389,4 +416,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Estas funciones se ejecutan cuando la página termina de cargar
     loadCart(); // Carga el carrito guardado del usuario (si existe)
     fetchProducts(); // Obtiene y muestra los productos de la API
-  });
+});
