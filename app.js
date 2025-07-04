@@ -235,7 +235,44 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCartUI(); // Actualiza la interfaz
         }
     }
-  
+
+// Modificación en updateCartUI
+if (cart.length > 0) {
+    cartItemsContainer.innerHTML += `
+        <div class="cart-discount">
+            <label for="discount-input">Descuento (%):</label>
+            <input type="number" id="discount-input" min="0" max="100" value="0" class="w-16 p-1 border rounded">
+            <p>Total con descuento: $<span id="cart-discount-total">0.00</span></p>
+        </div>
+    `;
+    updateDiscountedTotal(); // Calcular el total con descuento inicial
+}
+
+// Añadir al final de los escuchadores de eventos (antes de la inicialización)
+cartItemsContainer.addEventListener('input', (e) => {
+    if (e.target.id === 'discount-input') {
+        updateDiscountedTotal();
+    }
+
+        /**
+     * Aqui se supone que pasa el descuento
+     */
+        function updateDiscountedTotal() {
+            const discountInput = document.getElementById('discount-input');
+            const discountTotalEl = document.getElementById('cart-discount-total');
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+             let discount = parseFloat(discountInput.value) || 0;
+    
+            if (discount < 0 || discount > 100 || isNaN(discount)) {
+                discount = 0;
+                discountInput.value = 0;
+        }
+    
+             const discountedTotal = total * (1 - discount / 100);
+                discountTotalEl.textContent = `$${discountedTotal.toFixed(2)}`;
+    }
+});
+    
     /**
      * Actualiza toda la interfaz de usuario del carrito (sidebar, total, contador).
      * Esta función se llama cada vez que el carrito cambia.
